@@ -18,8 +18,8 @@ canvas {
     transform: translate(-50%, -50%) scale(1);
     opacity: 0;
     transition: opacity 2s ease, transform 2s ease;
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 90vw;
+    max-height: 90vh;
     pointer-events: none;
     z-index: 10;
     border-radius: 12px;
@@ -31,8 +31,8 @@ canvas {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px 40px;
-    font-size: 24px;
+    padding: 5vw 8vw;
+    font-size: 5vw;
     background-color: #00ff99;
     color: black;
     border: none;
@@ -45,4 +45,11 @@ canvas {
 
 #startButton:hover {
     transform: translate(-50%, -50%) scale(1.1);
+}
+
+@media (min-width: 768px) {
+    #startButton {
+        padding: 20px 40px;
+        font-size: 24px;
+    }
 }
