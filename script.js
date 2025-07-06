@@ -1,12 +1,13 @@
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+// canvas.width = window.innerWidth;
+// canvas.height = window.innerHeight;
 function resizeCanvas() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 }
 window.addEventListener('resize', resizeCanvas);
 resizeCanvas(); // gọi khi load trang
-
 const binaryChars = "01";
 const fontSize = 16;
 const columns = Math.floor(canvas.width / fontSize);
@@ -97,24 +98,6 @@ function createParticlesFromText(text) {
 
         setTimeout(() => {
             messageIndex++;
-
-            if (messageIndex === lastMessageIndex - 1) {
-                endingAudio.volume = 0.1;
-                endingAudio.play().catch((e) => {
-                    console.log("Không phát được nhạc:", e);
-                });
-
-                let volume = 0.1;
-                const fadeInterval = setInterval(() => {
-                    if (volume < 1.0) {
-                        volume += 0.02;
-                        endingAudio.volume = Math.min(volume, 1.0);
-                    } else {
-                        clearInterval(fadeInterval);
-                    }
-                }, 200);
-            }
-
             if (messageIndex === allMessages.length) {
                 endingImage.style.opacity = 1;
                 endingImage.style.transform = "translate(-50%, -50%) scale(1.05)";
@@ -161,6 +144,27 @@ function animate() {
 const startButton = document.getElementById("startButton");
 startButton.addEventListener("click", () => {
     startButton.style.display = "none";
+
+    // ✅ Phát nhạc ngay sau khi người dùng nhấn
+    endingAudio.volume = 0.1;
+    endingAudio.play().catch((e) => {
+        console.log("Không phát được nhạc:", e);
+    });
+
+    // ✅ Fade-in âm lượng mượt từ 0.1 → 1.0
+    let volume = 0.1;
+    const fadeInterval = setInterval(() => {
+        if (volume < 1.0) {
+            volume += 0.02;
+            endingAudio.volume = Math.min(volume, 1.0);
+        } else {
+            clearInterval(fadeInterval);
+        }
+    }, 200);
+
+    // Bắt đầu hiệu ứng
     createParticlesFromText(allMessages[messageIndex]);
     animate();
 });
+
+
