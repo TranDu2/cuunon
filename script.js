@@ -93,7 +93,7 @@ function createParticlesFromText(text) {
         }
     }
 
-    const showTime = isIntro ? 1000 : 5500;
+    const showTime = isIntro ? 1000 : 3500;
     const explodeTime = isIntro ? 1500 : 2000;
 
     setTimeout(() => {
